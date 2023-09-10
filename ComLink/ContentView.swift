@@ -11,6 +11,8 @@ import SwiftUI
 struct LoginView: View {
     @State var inputEmail: String = ""
     @State var inputPassword: String = ""
+    // アラート判定用
+    @State private var showingAlert = false
     
     var body: some View {
         NavigationView {
@@ -33,6 +35,8 @@ struct LoginView: View {
                 
                 Button(action: {
                     print("Login処理")
+                    // 自身を判定
+                    self.showingAlert = true
                 },
                        label: {
                     Text("Login")
@@ -43,6 +47,9 @@ struct LoginView: View {
                         .background(Color.accentColor)
                         .cornerRadius(8)
                 })
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("テストアラートです。"))
+                }
                 
                 Spacer()
             }
